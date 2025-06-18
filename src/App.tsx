@@ -177,6 +177,7 @@ export default function App() {
       <div className="order-2 flex flex-col items-center space-y-8">
       <div className="w-full lg:px-8 space-y-6">
       
+        <label className="block text-md font-medium mb-2">Select a concern:</label>
         <select className="w-full p-3 rounded-xl border border-gray-300 shadow-lg bg-[#F9FAFB] focus:ring-1"
           value={selectedConcern} onChange={handleConcernChange}>
           
@@ -216,28 +217,29 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">First Name</label>
-              <input type="text" className="w-full p-3 border border-gray-300 rounded-lg" />
+              <label className="block text-sm font-medium mb-1">First Name *</label>
+              <input type="text" className="w-full p-3 border border-gray-300 rounded-lg" placeholder="John" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Last Name</label>
-              <input type="text" className="w-full p-3 border border-gray-300 rounded-lg" />
+              <label className="block text-sm font-medium mb-1">Last Name *</label>
+              <input type="text" className="w-full p-3 border border-gray-300 rounded-lg" placeholder="Doe" />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Mobile Number</label>
-              <input type="tel" className="w-full p-3 border border-gray-300 rounded-lg" />
+              <label className="block text-sm font-medium mb-1">Mobile Number *</label>
+              <input type="tel" className="w-full p-3 border border-gray-300 rounded-lg" placeholder="+63 123 456 7890" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Email Address</label>
-              <input type="email" className="w-full p-3 border border-gray-300 rounded-lg" />
+              <label className="block text-sm font-medium mb-1">Email Address *</label>
+              <input type="email" className="w-full p-3 border border-gray-300 rounded-lg" placeholder="john.doe@gmail.com" />
             </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Message or Concern</label>
+          <div className="w-full">
+            <label className="block text-sm font-medium mb-1">Message or Concern *</label>
             <textarea className="w-full p-3 border border-gray-300 rounded-lg" rows={4} />
+            <p className="italic text-right">* These fields are required.</p>
           </div>
           
           <button className="bg-[#2C3B55] text-white px-6 py-3 rounded-xl hover:bg-[#1f2c3d] transition"
