@@ -1,3 +1,4 @@
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { useState } from "react";
 
 type Concern = {
@@ -62,6 +63,11 @@ const faqs: FAQItem[] = [
     question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
     answer:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec bibendum libero. Proin at purus sit amet elit luctus faucibus.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec bibendum libero. Proin at purus sit amet elit luctus faucibus.",
   }
 ];
 
@@ -102,7 +108,7 @@ export default function App() {
     <div className="w-full h-[44px] lg:h-[99.33px] bg-[#2C3B55]" />
 
     {/* CTA Banner */}
-    <div className="w-full h-[180px] lg:h-[300px] bg-[#C0DCF4] flex flex-col justify-center items-center space-y-4 text-center px-4">
+    <div className="w-full h-[180px] lg:h-[300px] bg-[#C0DCF4] flex flex-col justify-center items-center space-y-4 lg:space-y-8 text-center px-4">
 
       <span className="font-montserrat font-semibold text-5xl lg:text-6xl">Talk to Us!</span>
 
@@ -156,9 +162,15 @@ export default function App() {
 
             {faqs.map((faq, index) => (
             <div key={index} className="border border-gray-300 rounded-xl bg-white shadow">
-              <button className="w-full text-left px-6 py-4 text-sm lg:text-lg bg-[#C0DCF4] hover:bg-[#b0d0ec] rounded-t-xl focus:outline-none" onClick={() => toggle(index)}> {faq.question} </button>
+              <button className="w-full flex justify-between items-center px-6 py-4 text-sm lg:text-lg bg-[#C0DCF4] hover:bg-[#b0d0ec] rounded-t-xl focus:outline-none"
+              onClick={() => toggle(index)}>
+                <span className="text-left">{faq.question}</span>
+                <ChevronDownIcon className={`h-5 w-5 transform transition-transform duration-300 ${ openIndex === index ? 'rotate-180' : '' }`} />
+              </button>
               {openIndex === index && (
-              <div className="px-6 py-4 text-sm lg:text-lg bg-gray-50 rounded-b-xl text-justify">{faq.answer}</div>
+              <div className="px-6 py-4 text-sm lg:text-lg bg-gray-50 rounded-b-xl text-justify">
+                {faq.answer}
+              </div>
               )}
             </div>
             ))}
@@ -204,12 +216,15 @@ export default function App() {
         </select>
 
         {shouldShowProductDropdown && (
-        <select className="w-full p-3 rounded-xl border border-gray-300 shadow-lg bg-white focus:ring-1" value={selectedProduct} onChange={(e) => setSelectedProduct(e.target.value)}>
-          <option value="" disabled>Select a product</option>
-          {products.map((product) => (
-          <option key={product} value={product.toLowerCase().replace(/\s+/g, "-")}>{product}</option>
-          ))}
-        </select>
+        <div className="w-full">
+          <label className="block text-md font-medium mb-2">Select a product:</label>
+          <select className="w-full p-3 rounded-xl border border-gray-300 shadow-lg bg-white focus:ring-1" value={selectedProduct} onChange={(e) => setSelectedProduct(e.target.value)}>
+            <option value="" disabled>Select a product</option>
+            {products.map((product) => (
+            <option key={product} value={product.toLowerCase().replace(/\s+/g, "-")}>{product}</option>
+            ))}
+          </select>
+        </div>
         )}
 
         {shouldShowForm && (
@@ -236,14 +251,26 @@ export default function App() {
               <input type="email" className="w-full p-3 border border-gray-300 rounded-lg" placeholder="john.doe@gmail.com" />
             </div>
           </div>
+
           <div className="w-full">
+
             <label className="block text-sm font-medium mb-1">Message or Concern *</label>
-            <textarea className="w-full p-3 border border-gray-300 rounded-lg" rows={4} />
-            <p className="italic text-right">* These fields are required.</p>
+            <textarea className="w-full p-3 border border-gray-300 rounded-lg" rows={4} placeholder='Kindly place your concern here...'/>
+
+            <span className="italic text-right mt-2 text-sm">* These fields are required.</span>
+
+            <div className="flex items-center gap-2 mt-3 text-sm">
+              <input type="checkbox" className="accent-[#2C3B55]" />
+              <span className="flex flex-wrap">
+                I agree to the&nbsp;
+                <button className="text-blue-600 underline hover:text-blue-800 hover:cursor-pointer" type="button" onClick={() => setShowModal(true)} >acknowledgement</button>
+                &nbsp;notice.
+              </span>
+            </div>
+
           </div>
           
-          <button className="bg-[#2C3B55] text-white px-6 py-3 rounded-xl hover:bg-[#1f2c3d] transition"
-            onClick={() => setShowModal(true)}>
+          <button className="bg-[#2C3B55] text-white px-6 py-3 rounded-xl hover:bg-[#1f2c3d] transition">
             Submit
           </button>
 
